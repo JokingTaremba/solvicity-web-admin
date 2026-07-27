@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Navigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader } from "lucide-react";
 import { z } from "zod";
-
 import { useAuthStore } from "@/shared/stores/auth-store";
 import { useLogin } from "@/features/auth/hooks/use-login";
-import { getApiErrorMessage } from "@/shared/utils/api-error/api-error-message";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { loginSchema } from "@/features/auth/schemas/login-schema";
@@ -85,14 +83,8 @@ export function LoginPage() {
             )}
           </div>
 
-          {loginMutation.isError && (
-            <p className="text-sm text-destructive">
-              {getApiErrorMessage(loginMutation.error)}
-            </p>
-          )}
-
           <Button type="submit" disabled={loginMutation.isPending}>
-            {loginMutation.isPending ? "A entrar..." : "Entrar"}
+            {loginMutation.isPending ? <Loader className="size-4" /> : "Entrar"}
           </Button>
         </form>
       </div>

@@ -3,6 +3,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { login } from "@/features/auth/api/auth-api";
 import { useAuthStore } from "@/shared/stores/auth-store";
 import type { LoginRequest } from "@/features/auth/types/auth-type";
+import { toast } from "sonner";
+import { getApiErrorMessage } from "@/shared/utils/api-error/api-error-message";
 
 export function useLogin() {
   const setAuth = useAuthStore((s) => s.setAuth);
@@ -19,6 +21,9 @@ export function useLogin() {
         avatarUrl: data.avatarUrl,
       });
       navigate({ to: "/" });
+    },
+    onError: (error) => {
+      toast.error(getApiErrorMessage(error));
     },
   });
 }
