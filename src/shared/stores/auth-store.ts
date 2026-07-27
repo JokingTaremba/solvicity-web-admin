@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-export type UserRole = "COMMON" | "ADMIN" | "SUPERADMIN";
+import type { UserRole } from "../types/user-role-type";
 
 export interface AuthUser {
   id: string;

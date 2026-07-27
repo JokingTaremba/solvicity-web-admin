@@ -1,4 +1,4 @@
-import type { UserRole } from "@/shared/stores/auth-store";
+import type { UserRole } from "@/shared/types/user-role-type";
 
 export interface LoginRequest {
   email: string;

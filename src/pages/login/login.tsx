@@ -8,8 +8,8 @@ import { z } from "zod";
 import { useAuthStore } from "@/shared/stores/auth-store";
 import { useLogin } from "@/features/auth/hooks/use-login";
 import { getApiErrorMessage } from "@/shared/utils/api-error/api-error-message";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/shared/components/ui/button";
+import { Input } from "@/shared/components/ui/input";
 import { loginSchema } from "@/features/auth/schemas/login-schema";
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -30,10 +30,10 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="w-full max-w-sm rounded-lg border border-border bg-card p-6 shadow-sm">
         <h1 className="text-xl font-semibold">Solvicity Admin</h1>
-        <p className="mb-6 text-sm text-slate-500">
+        <p className="mb-6 text-sm text-muted-foreground">
           Inicia sessão para gerir a plataforma.
         </p>
 
@@ -47,7 +47,7 @@ export function LoginPage() {
             </label>
             <Input id="email" type="email" {...register("email")} />
             {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
+              <p className="text-sm text-destructive">{errors.email.message}</p>
             )}
           </div>
 
@@ -79,12 +79,14 @@ export function LoginPage() {
               </button>
             </div>
             {errors.password && (
-              <p className="text-sm text-red-500">{errors.password.message}</p>
+              <p className="text-sm text-destructive">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
           {loginMutation.isError && (
-            <p className="text-sm text-red-500">
+            <p className="text-sm text-destructive">
               {getApiErrorMessage(loginMutation.error)}
             </p>
           )}
