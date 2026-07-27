@@ -8,3 +8,8 @@ export async function login(request: LoginRequest): Promise<AuthResponse> {
   const { data } = await apiClient.post<AuthResponse>("/auth/login", request);
   return data;
 }
+
+export async function getMe() {
+  const { data } = await apiClient.get("/auth/me");
+  return data;
+}

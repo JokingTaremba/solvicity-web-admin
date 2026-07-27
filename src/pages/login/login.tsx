@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Navigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff } from "lucide-react";
 import { z } from "zod";
 
 import { useAuthStore } from "@/shared/stores/auth-store";
 import { useLogin } from "@/features/auth/hooks/use-login";
+import { getApiErrorMessage } from "@/shared/utils/api-error/api-error-message";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { loginSchema } from "@/features/auth/schemas/login-schema";
@@ -14,6 +17,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 export function LoginPage() {
   const token = useAuthStore((s) => s.token);
   const loginMutation = useLogin();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -51,7 +55,29 @@ export function LoginPage() {
             <label htmlFor="password" className="text-sm font-medium">
               Password
             </label>
-            <Input id="password" type="password" {...register("password")} />
+            <div className="relative">
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                className="pr-9"
+                {...register("password")}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-slate-400 hover:text-slate-600"
+                tabIndex={-1}
+                aria-label={
+                  showPassword ? "Esconder password" : "Mostrar password"
+                }
+              >
+                {showPassword ? (
+                  <EyeOff className="size-4" />
+                ) : (
+                  <Eye className="size-4" />
+                )}
+              </button>
+            </div>
             {errors.password && (
               <p className="text-sm text-red-500">{errors.password.message}</p>
             )}
@@ -59,7 +85,7 @@ export function LoginPage() {
 
           {loginMutation.isError && (
             <p className="text-sm text-red-500">
-              Credenciais inválidas. Verifica o email e a password.
+              {getApiErrorMessage(loginMutation.error)}
             </p>
           )}
 
