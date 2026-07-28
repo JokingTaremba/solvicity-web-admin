@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Navigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Loader } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { useAuthStore } from "@/shared/stores/auth-store";
 import { useLogin } from "@/features/auth/hooks/use-login";
@@ -84,7 +84,11 @@ export function LoginPage() {
           </div>
 
           <Button type="submit" disabled={loginMutation.isPending}>
-            {loginMutation.isPending ? <Loader className="size-4" /> : "Entrar"}
+            {loginMutation.isPending ? (
+              <Loader2 className="size-4" />
+            ) : (
+              "Entrar"
+            )}
           </Button>
         </form>
       </div>
