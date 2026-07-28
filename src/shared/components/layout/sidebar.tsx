@@ -66,7 +66,7 @@ export function Sidebar() {
           <div className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
             SC
           </div>
-          <span className="font-semibold">Solvicity Admin</span>
+          <span className="text-xl font-semibold">Solvicity Admin</span>
         </div>
       </SidebarHeader>
 
@@ -77,6 +77,7 @@ export function Sidebar() {
               {navItems.map(({ to, label, icon: Icon }) => (
                 <SidebarMenuItem key={to}>
                   <SidebarMenuButton
+                    size="lg"
                     render={
                       <Link
                         to={to}
