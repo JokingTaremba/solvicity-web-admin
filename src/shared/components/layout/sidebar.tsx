@@ -11,6 +11,8 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarGroup,
+  SidebarGroupContent,
 } from "@/shared/components/ui/sidebar";
 import {
   Avatar,
@@ -62,33 +64,37 @@ export function Sidebar() {
       <SidebarHeader className="px-3 py-4">
         <div className="flex items-center gap-2 px-1">
           <div className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
-            S
+            SC
           </div>
           <span className="font-semibold">Solvicity Admin</span>
         </div>
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarMenu>
-          {navItems.map(({ to, label, icon: Icon }) => (
-            <SidebarMenuItem key={to}>
-              <SidebarMenuButton
-                render={
-                  <Link
-                    to={to}
-                    activeOptions={{ exact: to === "/" }}
-                    activeProps={{
-                      className: "!bg-primary-container !text-primary",
-                    }}
-                  />
-                }
-              >
-                <Icon />
-                <span>{label}</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu className="gap-1">
+              {navItems.map(({ to, label, icon: Icon }) => (
+                <SidebarMenuItem key={to}>
+                  <SidebarMenuButton
+                    render={
+                      <Link
+                        to={to}
+                        activeOptions={{ exact: to === "/" }}
+                        activeProps={{
+                          className: "!bg-primary-container !text-primary",
+                        }}
+                      />
+                    }
+                  >
+                    <Icon />
+                    <span>{label}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter className="border-t border-border px-3 py-3">

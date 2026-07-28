@@ -30,10 +30,21 @@ export function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-sm rounded-lg border border-border bg-card p-6 shadow-sm">
-        <h1 className="text-xl font-semibold">Solvicity Admin</h1>
-        <p className="mb-6 text-sm text-muted-foreground">
-          Inicia sessão para gerir a plataforma.
-        </p>
+        <div className="mb-8">
+          <div className="flex items-center gap-3">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-primary font-bold text-primary-foreground">
+              SC
+            </div>
+
+            <div>
+              <h1 className="text-xl font-semibold">Solvicity Admin</h1>
+
+              <p className="text-sm text-muted-foreground">
+                Inicia sessão para gerir a plataforma.
+              </p>
+            </div>
+          </div>
+        </div>
 
         <form
           className="flex flex-col gap-4"
@@ -83,7 +94,7 @@ export function LoginPage() {
             )}
           </div>
 
-          <Button type="submit" disabled={loginMutation.isPending}>
+          <Button type="submit" size="lg" disabled={loginMutation.isPending}>
             {loginMutation.isPending ? (
               <Loader2 className="size-4" />
             ) : (
