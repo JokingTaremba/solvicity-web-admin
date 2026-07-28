@@ -2,6 +2,10 @@ import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { useAuthStore } from "@/shared/stores/auth-store";
 import { useSessionCheck } from "@/features/auth/hooks/use-session-check";
 import { Sidebar } from "@/shared/components/layout/sidebar";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/shared/components/ui/sidebar";
 
 export const Route = createFileRoute("/_auth")({
   beforeLoad: () => {
@@ -25,11 +29,12 @@ function AuthLayout() {
   }
 
   return (
-    <div className="flex min-h-screen">
+    <SidebarProvider>
       <Sidebar />
       <main className="flex-1 overflow-y-auto p-8">
+        <SidebarTrigger className="mb-4" />
         <Outlet />
       </main>
-    </div>
+    </SidebarProvider>
   );
 }
