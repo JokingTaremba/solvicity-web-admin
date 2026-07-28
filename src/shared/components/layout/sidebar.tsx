@@ -12,7 +12,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
 } from "@/shared/components/ui/sidebar";
-import { UserProfileMenu } from "./UserProfileMenu";
+import { UserProfileMenu } from "./user-profile-menu";
 
 const navItems = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -46,13 +46,14 @@ export function Sidebar() {
                         to={to}
                         activeOptions={{ exact: to === "/" }}
                         activeProps={{
-                          className: "!bg-primary-container !text-primary",
+                          className:
+                            "!bg-primary-container !text-primary !font-bold",
                         }}
                       />
                     }
                   >
                     <Icon />
-                    <span>{label}</span>
+                    <span className="font-semibold">{label}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
