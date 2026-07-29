@@ -10,6 +10,7 @@ import { getCategoryColumns } from "@/features/categories/components/category-co
 import type { CategoryResponse } from "@/features/categories/types/categories-types";
 import { DataTable } from "@/shared/components/data-table/data-table";
 import { DataTablePagination } from "@/shared/components/data-table/data-table-pagination";
+import { ListPageShell } from "@/shared/components/layout/list-page-shell";
 import { Button } from "@/shared/components/ui/button";
 
 export function CategoriesPage() {
@@ -58,53 +59,58 @@ export function CategoriesPage() {
   });
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold">Categorias</h1>
-          <p className="text-muted-foreground">
-            Gere as categorias usadas para classificar reports.
+    <>
+      <ListPageShell
+        header={
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold">Categorias</h1>
+              <p className="text-muted-foreground">
+                Gere as categorias usadas para classificar reports.
+              </p>
+            </div>
+            <Button onClick={openCreateDialog}>
+              <Plus />
+              Nova categoria
+            </Button>
+          </div>
+        }
+        filters={
+          <CategoryFilters
+            nameFilter={nameFilter}
+            onNameFilterChange={(value) => {
+              setNameFilter(value);
+              setPage(0);
+            }}
+          />
+        }
+        footer={
+          <DataTablePagination
+            page={page}
+            totalPages={data?.totalPages ?? 0}
+            totalElements={data?.totalElements ?? 0}
+            isLastPage={data?.last ?? true}
+            onPageChange={setPage}
+          />
+        }
+      >
+        {isError && (
+          <p className="p-4 text-sm text-destructive">
+            Não foi possível carregar as categorias.
           </p>
-        </div>
-        <Button onClick={openCreateDialog}>
-          <Plus />
-          Nova categoria
-        </Button>
-      </div>
-
-      <CategoryFilters
-        nameFilter={nameFilter}
-        onNameFilterChange={(value) => {
-          setNameFilter(value);
-          setPage(0);
-        }}
-      />
-
-      {isError && (
-        <p className="text-sm text-destructive">
-          Não foi possível carregar as categorias.
-        </p>
-      )}
-
-      <DataTable
-        columns={columns}
-        data={data?.content ?? []}
-        isLoading={isLoading}
-        emptyMessage="Nenhuma categoria encontrada."
-        sorting={sorting}
-        onSortingChange={(updater) => {
-          setSorting(updater);
-          setPage(0);
-        }}
-      />
-
-      <DataTablePagination
-        page={page}
-        totalPages={data?.totalPages ?? 0}
-        totalElements={data?.totalElements ?? 0}
-        isLastPage={data?.last ?? true}
-        onPageChange={setPage}
-      />
+        )}
+        <DataTable
+          columns={columns}
+          data={data?.content ?? []}
+          isLoading={isLoading}
+          emptyMessage="Nenhuma categoria encontrada."
+          sorting={sorting}
+          onSortingChange={(updater) => {
+            setSorting(updater);
+            setPage(0);
+          }}
+        />
+      </ListPageShell>
 
       <CategoryFormDialog
         open={formOpen}
@@ -116,6 +122,6 @@ export function CategoriesPage() {
         onOpenChange={setDeleteOpen}
         category={deletingCategory}
       />
-    </div>
+    </>
   );
 }

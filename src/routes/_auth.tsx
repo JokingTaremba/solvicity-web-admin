@@ -31,10 +31,14 @@ function AuthLayout() {
   return (
     <SidebarProvider>
       <Sidebar />
-      <main className="flex-1 overflow-y-auto p-8">
-        <SidebarTrigger className="mb-4" />
-        <Outlet />
-      </main>
+      <div className="flex h-screen flex-1 flex-col overflow-hidden">
+        <div className="shrink-0 border-b border-border px-8 py-3">
+          <SidebarTrigger />
+        </div>
+        <main className="flex-1 overflow-hidden p-8">
+          <Outlet />
+        </main>
+      </div>
     </SidebarProvider>
   );
 }
