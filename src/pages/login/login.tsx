@@ -74,7 +74,7 @@ export function LoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-slate-400 hover:text-slate-600"
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
                 tabIndex={-1}
                 aria-label={
                   showPassword ? "Esconder password" : "Mostrar password"
@@ -96,7 +96,7 @@ export function LoginPage() {
 
           <Button type="submit" size="lg" disabled={loginMutation.isPending}>
             {loginMutation.isPending ? (
-              <Loader2 className="size-4" />
+              <Loader2 className="size-4 animate-spin" />
             ) : (
               "Entrar"
             )}

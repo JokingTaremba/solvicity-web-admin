@@ -119,7 +119,7 @@ export function UserProfileMenu() {
             className="text-destructive"
             onClick={() => setConfirmOpen(true)}
           >
-            <LogOut className="mr-2 size-4" />
+            <LogOut className="size-4" />
             Terminar sessão
           </DropdownMenuItem>
         </DropdownMenuContent>
