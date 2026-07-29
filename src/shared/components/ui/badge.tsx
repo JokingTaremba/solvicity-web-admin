@@ -19,10 +19,15 @@ const badgeVariants = cva(
         ghost:
           "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
         link: "text-primary underline-offset-4 hover:underline",
-        success: "border-transparent bg-success text-success-foreground",
-        warning: "border-transparent bg-warning text-warning-foreground",
-        info: "border-transparent bg-tertiary text-tertiary-foreground",
-        muted: "border-transparent bg-muted text-muted-foreground",
+        warning:
+          "border-orange-200/60 bg-orange-50/70 text-orange-700 hover:bg-orange-100/80 focus-visible:ring-orange-200 dark:border-orange-800/50 dark:bg-orange-950/30 dark:text-orange-400",
+        review:
+          "border-primary/25 bg-primary/10 text-primary hover:bg-primary/15 focus-visible:ring-primary/20 dark:border-primary/30 dark:bg-primary/15 dark:text-primary",
+        info: "border-violet-200/70 bg-violet-50 text-violet-700 hover:bg-violet-100 focus-visible:ring-violet-200 dark:border-violet-800/60 dark:bg-violet-950/30 dark:text-violet-400",
+        success:
+          "border-success/25 bg-success/10 text-success hover:bg-success/15 focus-visible:ring-success/20 dark:border-success/30 dark:bg-success/15 dark:text-success",
+        rejected:
+          "border-destructive/25 bg-destructive/10 text-destructive hover:bg-destructive/15 focus-visible:ring-destructive/20 dark:border-destructive/30 dark:bg-destructive/15 dark:text-destructive",
       },
     },
     defaultVariants: {

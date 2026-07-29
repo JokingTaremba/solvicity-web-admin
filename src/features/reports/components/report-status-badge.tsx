@@ -5,14 +5,14 @@ const statusConfig: Record<
   ReportStatus,
   {
     label: string;
-    variant: "warning" | "info" | "default" | "success" | "destructive";
+    variant: "warning" | "review" | "info" | "success" | "rejected";
   }
 > = {
   PENDING: { label: "Pendente", variant: "warning" },
-  UNDER_REVIEW: { label: "Em análise", variant: "info" },
-  IN_PROGRESS: { label: "Em progresso", variant: "default" },
+  UNDER_REVIEW: { label: "Em análise", variant: "review" },
+  IN_PROGRESS: { label: "Em progresso", variant: "info" },
   COMPLETED: { label: "Concluído", variant: "success" },
-  REJECTED: { label: "Rejeitado", variant: "destructive" },
+  REJECTED: { label: "Rejeitado", variant: "rejected" },
 };
 
 export function ReportStatusBadge({ status }: { status: ReportStatus }) {

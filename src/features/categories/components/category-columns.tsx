@@ -42,7 +42,7 @@ export function getCategoryColumns({
         <DataTableColumnHeader column={column} title="Estado" />
       ),
       cell: ({ row }) => (
-        <Badge variant={row.original.isActive ? "success" : "muted"}>
+        <Badge variant={row.original.isActive ? "default" : "outline"}>
           {row.original.isActive ? "Activa" : "Inactiva"}
         </Badge>
       ),

@@ -44,7 +44,7 @@ export function getReportColumns({
       id: "category",
       header: "Categoria",
       cell: ({ row }) => (
-        <Badge variant="info">{row.original.category.name}</Badge>
+        <Badge variant="outline">{row.original.category.name}</Badge>
       ),
     },
     {
