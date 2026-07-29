@@ -66,7 +66,9 @@ export function CategoriesPage() {
             <div>
               <h1 className="text-2xl font-semibold">Categorias</h1>
               <p className="text-muted-foreground">
-                Gere as categorias usadas para classificar reports.
+                {data
+                  ? `${data.totalElements} ${data.totalElements === 1 ? "categoria" : "categorias"}`
+                  : "A carregar..."}
               </p>
             </div>
             <Button onClick={openCreateDialog}>
