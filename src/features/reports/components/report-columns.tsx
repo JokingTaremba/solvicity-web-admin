@@ -17,6 +17,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/shared/components/ui/dropdown-menu";
+import { Badge } from "@/shared/components/ui/badge";
 
 interface ReportColumnsProps {
   onEdit: (report: ReportSummaryResponse) => void;
@@ -42,7 +43,9 @@ export function getReportColumns({
     {
       id: "category",
       header: "Categoria",
-      cell: ({ row }) => row.original.category.name,
+      cell: ({ row }) => (
+        <Badge variant="info">{row.original.category.name}</Badge>
+      ),
     },
     {
       accessorKey: "status",
@@ -94,10 +97,12 @@ export function getReportColumns({
                   <RefreshCw className="size-4" />
                   Estado
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => onEdit(report)}>
-                  <Pencil className="size-4" />
-                  Editar
-                </DropdownMenuItem>
+                {report.status === "PENDING" && (
+                  <DropdownMenuItem onClick={() => onEdit(report)}>
+                    <Pencil className="size-4" />
+                    Editar
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem
                   className="text-destructive"
                   onClick={() => onDelete(report)}

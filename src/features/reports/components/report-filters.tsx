@@ -37,7 +37,12 @@ export function ReportFilters({
         onChange={(e) => onTitleFilterChange(e.target.value)}
         className="max-w-xs"
       />
-      <Select value={statusFilter} onValueChange={onStatusFilterChange}>
+      <Select
+        value={statusFilter}
+        onValueChange={(value) => {
+          if (value) onStatusFilterChange(value as ReportStatus | "ALL");
+        }}
+      >
         <SelectTrigger className="w-48">
           <SelectValue placeholder="Estado" />
         </SelectTrigger>

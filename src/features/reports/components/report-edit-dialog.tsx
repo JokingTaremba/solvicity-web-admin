@@ -143,7 +143,13 @@ export function ReportEditDialog({
                     onValueChange={field.onChange}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecciona uma categoria" />
+                      <SelectValue placeholder="Selecciona uma categoria">
+                        {
+                          categoriesData?.content.find(
+                            (c) => c.id === field.value,
+                          )?.name
+                        }
+                      </SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       {categoriesData?.content.map((category) => (

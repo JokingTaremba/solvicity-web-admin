@@ -17,6 +17,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/shared/components/ui/dialog";
+import { statusButtonStyles } from "./status-button-style";
 
 const statusLabels: Record<ReportStatus, string> = {
   PENDING: "Pendente",
@@ -96,6 +97,7 @@ export function ChangeStatusDialog({
                     size="sm"
                     type="button"
                     variant="outline"
+                    className={statusButtonStyles[status]}
                     disabled={changeStatusMutation.isPending}
                     onClick={() => handleChange(status)}
                   >

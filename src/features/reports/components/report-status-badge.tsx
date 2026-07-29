@@ -5,13 +5,13 @@ const statusConfig: Record<
   ReportStatus,
   {
     label: string;
-    variant: "default" | "secondary" | "outline" | "destructive";
+    variant: "warning" | "info" | "default" | "success" | "destructive";
   }
 > = {
-  PENDING: { label: "Pendente", variant: "outline" },
-  UNDER_REVIEW: { label: "Em análise", variant: "secondary" },
+  PENDING: { label: "Pendente", variant: "warning" },
+  UNDER_REVIEW: { label: "Em análise", variant: "info" },
   IN_PROGRESS: { label: "Em progresso", variant: "default" },
-  COMPLETED: { label: "Concluído", variant: "secondary" },
+  COMPLETED: { label: "Concluído", variant: "success" },
   REJECTED: { label: "Rejeitado", variant: "destructive" },
 };
 
