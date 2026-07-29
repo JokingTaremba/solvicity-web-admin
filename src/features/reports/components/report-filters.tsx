@@ -44,7 +44,12 @@ export function ReportFilters({
         }}
       >
         <SelectTrigger className="w-48">
-          <SelectValue placeholder="Estado" />
+          <SelectValue>
+            {statusFilter === "ALL"
+              ? "Todos os estados"
+              : statusOptions.find((option) => option.value === statusFilter)
+                  ?.label}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="ALL">Todos os estados</SelectItem>

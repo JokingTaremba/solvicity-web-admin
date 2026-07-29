@@ -89,7 +89,7 @@ export function ChangeStatusDialog({
             </p>
           ) : (
             <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium">Novo estado</p>
+              <p className="text-sm font-medium">Marcar como:</p>
               <div className="flex flex-wrap gap-2">
                 {availableTransitions.map((status) => (
                   <Button
