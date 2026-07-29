@@ -63,7 +63,7 @@ export function ChangeStatusDialog({
         <DialogHeader>
           <DialogTitle>Mudar estado do report</DialogTitle>
           <DialogDescription>
-            "{report?.title}" — estado actual:{" "}
+            "{report?.title}" - estado actual:{" "}
             {report && <ReportStatusBadge status={report.status} />}
           </DialogDescription>
         </DialogHeader>
@@ -93,6 +93,7 @@ export function ChangeStatusDialog({
                 {availableTransitions.map((status) => (
                   <Button
                     key={status}
+                    size="sm"
                     type="button"
                     variant="outline"
                     disabled={changeStatusMutation.isPending}

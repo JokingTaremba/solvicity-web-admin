@@ -40,19 +40,9 @@ export function getReportColumns({
       ),
     },
     {
-      id: "user",
-      header: "Utilizador",
-      cell: ({ row }) => row.original.user.name,
-    },
-    {
       id: "category",
       header: "Categoria",
       cell: ({ row }) => row.original.category.name,
-    },
-    {
-      id: "city",
-      header: "Cidade",
-      cell: ({ row }) => row.original.city ?? "—",
     },
     {
       accessorKey: "status",
@@ -60,6 +50,16 @@ export function getReportColumns({
         <DataTableColumnHeader column={column} title="Estado" />
       ),
       cell: ({ row }) => <ReportStatusBadge status={row.original.status} />,
+    },
+    {
+      id: "city",
+      header: "Cidade",
+      cell: ({ row }) => row.original.city ?? "—",
+    },
+    {
+      id: "user",
+      header: "Utilizador",
+      cell: ({ row }) => row.original.user.name,
     },
     {
       accessorKey: "createdAt",
@@ -92,7 +92,7 @@ export function getReportColumns({
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => onChangeStatus(report)}>
                   <RefreshCw className="size-4" />
-                  Mudar estado
+                  Estado
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => onEdit(report)}>
                   <Pencil className="size-4" />
