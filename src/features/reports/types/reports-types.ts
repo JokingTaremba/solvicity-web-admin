@@ -81,6 +81,9 @@ export interface ReportResponse {
   latitude: number | null;
   longitude: number | null;
   status: ReportStatus;
+  media: MediaResponse[];
+  comments: CommentResponse[];
+  statusHistory: StatusHistoryResponse[];
   createdAt: string;
   updatedAt: string;
 }
