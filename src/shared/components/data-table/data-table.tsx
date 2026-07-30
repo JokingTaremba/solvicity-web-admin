@@ -23,6 +23,7 @@ interface DataTableProps<TData, TValue> {
   emptyMessage?: string;
   sorting?: SortingState;
   onSortingChange?: OnChangeFn<SortingState>;
+  onRowClick?: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -32,6 +33,7 @@ export function DataTable<TData, TValue>({
   emptyMessage = "Nenhum resultado encontrado.",
   sorting,
   onSortingChange,
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -86,7 +88,11 @@ export function DataTable<TData, TValue>({
 
         {!isLoading &&
           table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow
+              key={row.id}
+              onClick={() => onRowClick?.(row.original)}
+              className={onRowClick ? "cursor-pointer" : undefined}
+            >
               {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

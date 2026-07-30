@@ -14,6 +14,7 @@ import type {
 import { DataTable } from "@/shared/components/data-table/data-table";
 import { DataTablePagination } from "@/shared/components/data-table/data-table-pagination";
 import { ListPageShell } from "@/shared/components/layout/list-page-shell";
+import { Navigate } from "@tanstack/react-router";
 
 export function ReportsPage() {
   const [titleFilter, setTitleFilter] = useState("");
@@ -115,6 +116,12 @@ export function ReportsPage() {
             setSorting(updater);
             setPage(0);
           }}
+          onRowClick={(report) =>
+            Navigate({
+              to: "/reports/$reportId",
+              params: { reportId: report.id },
+            })
+          }
         />
       </ListPageShell>
 

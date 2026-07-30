@@ -85,7 +85,10 @@ export function getReportColumns({
       cell: ({ row }) => {
         const report = row.original;
         return (
-          <div className="flex justify-center">
+          <div
+            className="flex justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
             <DropdownMenu>
               <DropdownMenuTrigger
                 render={<Button variant="ghost" size="icon" />}
