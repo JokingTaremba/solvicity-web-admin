@@ -14,6 +14,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthIndexRouteImport } from './routes/_auth/index'
 import { Route as AuthCategoriesIndexRouteImport } from './routes/_auth/categories/index'
 import { Route as AuthReportsIndexRouteImport } from './routes/_auth/reports/index'
+import { Route as AuthReportsReportIdRouteImport } from './routes/_auth/reports/$reportId'
 import { Route as AuthUsersIndexRouteImport } from './routes/_auth/users/index'
 
 const AuthRoute = AuthRouteImport.update({
@@ -40,6 +41,11 @@ const AuthReportsIndexRoute = AuthReportsIndexRouteImport.update({
   path: '/reports/',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthReportsReportIdRoute = AuthReportsReportIdRouteImport.update({
+  id: '/reports/$reportId',
+  path: '/reports/$reportId',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AuthUsersIndexRoute = AuthUsersIndexRouteImport.update({
   id: '/users/',
   path: '/users/',
@@ -49,6 +55,7 @@ const AuthUsersIndexRoute = AuthUsersIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof AuthIndexRoute
   '/login': typeof LoginRoute
+  '/reports/$reportId': typeof AuthReportsReportIdRoute
   '/categories/': typeof AuthCategoriesIndexRoute
   '/reports/': typeof AuthReportsIndexRoute
   '/users/': typeof AuthUsersIndexRoute
@@ -56,6 +63,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/': typeof AuthIndexRoute
+  '/reports/$reportId': typeof AuthReportsReportIdRoute
   '/categories': typeof AuthCategoriesIndexRoute
   '/reports': typeof AuthReportsIndexRoute
   '/users': typeof AuthUsersIndexRoute
@@ -65,20 +73,34 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteWithChildren
   '/login': typeof LoginRoute
   '/_auth/': typeof AuthIndexRoute
+  '/_auth/reports/$reportId': typeof AuthReportsReportIdRoute
   '/_auth/categories/': typeof AuthCategoriesIndexRoute
   '/_auth/reports/': typeof AuthReportsIndexRoute
   '/_auth/users/': typeof AuthUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/categories/' | '/reports/' | '/users/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/reports/$reportId'
+    | '/categories/'
+    | '/reports/'
+    | '/users/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/' | '/categories' | '/reports' | '/users'
+  to:
+    | '/login'
+    | '/'
+    | '/reports/$reportId'
+    | '/categories'
+    | '/reports'
+    | '/users'
   id:
     | '__root__'
     | '/_auth'
     | '/login'
     | '/_auth/'
+    | '/_auth/reports/$reportId'
     | '/_auth/categories/'
     | '/_auth/reports/'
     | '/_auth/users/'
@@ -126,6 +148,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthReportsIndexRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/reports/$reportId': {
+      id: '/_auth/reports/$reportId'
+      path: '/reports/$reportId'
+      fullPath: '/reports/$reportId'
+      preLoaderRoute: typeof AuthReportsReportIdRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/users/': {
       id: '/_auth/users/'
       path: '/users'
@@ -138,6 +167,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthRouteChildren {
   AuthIndexRoute: typeof AuthIndexRoute
+  AuthReportsReportIdRoute: typeof AuthReportsReportIdRoute
   AuthCategoriesIndexRoute: typeof AuthCategoriesIndexRoute
   AuthReportsIndexRoute: typeof AuthReportsIndexRoute
   AuthUsersIndexRoute: typeof AuthUsersIndexRoute
@@ -145,6 +175,7 @@ interface AuthRouteChildren {
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
+  AuthReportsReportIdRoute: AuthReportsReportIdRoute,
   AuthCategoriesIndexRoute: AuthCategoriesIndexRoute,
   AuthReportsIndexRoute: AuthReportsIndexRoute,
   AuthUsersIndexRoute: AuthUsersIndexRoute,
