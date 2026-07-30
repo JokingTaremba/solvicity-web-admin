@@ -14,7 +14,7 @@ import type {
 import { DataTable } from "@/shared/components/data-table/data-table";
 import { DataTablePagination } from "@/shared/components/data-table/data-table-pagination";
 import { ListPageShell } from "@/shared/components/layout/list-page-shell";
-import { Navigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 
 export function ReportsPage() {
   const [titleFilter, setTitleFilter] = useState("");
@@ -42,6 +42,8 @@ export function ReportsPage() {
       "createdAt",
     sortDirection: activeSort?.desc ? "DESC" : "ASC",
   });
+
+  const navigate = useNavigate();
 
   function openStatusDialog(report: ReportSummaryResponse) {
     setSelectedReport(report);
@@ -117,7 +119,7 @@ export function ReportsPage() {
             setPage(0);
           }}
           onRowClick={(report) =>
-            Navigate({
+            navigate({
               to: "/reports/$reportId",
               params: { reportId: report.id },
             })
