@@ -43,7 +43,7 @@ export function MediaGallery({ media }: { media: MediaResponse[] }) {
     <>
       <div className="flex items-center gap-6">
         <div
-          className={`grid h-78 w-78 shrink-0 gap-1 overflow-hidden rounded-md ${getGridClass(visible.length)}`}
+          className={`grid h-88 w-88 shrink-0 gap-1 overflow-hidden rounded-md ${getGridClass(visible.length)}`}
         >
           {visible.map((item, index) => {
             const isLastTile = index === MAX_PREVIEW - 1 && remaining > 0;
