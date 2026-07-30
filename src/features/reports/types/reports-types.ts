@@ -18,6 +18,33 @@ interface UserSummaryResponse {
   name: string;
   avatarUrl: string | null;
 }
+export interface MediaResponse {
+  id: string;
+  url: string;
+  context: "REPORT" | "COMMENT" | "PROFILE";
+  reportId: string | null;
+  commentId: string | null;
+  uploadedBy: UserSummaryResponse;
+  createdAt: string;
+}
+export interface CommentResponse {
+  id: string;
+  user: UserSummaryResponse;
+  reportId: string;
+  text: string;
+  media: MediaResponse[];
+  createdAt: string;
+  updatedAt: string;
+}
+export interface StatusHistoryResponse {
+  id: string;
+  reportId: string;
+  changedBy: UserSummaryResponse;
+  previousStatus: ReportStatus;
+  newStatus: ReportStatus;
+  note: string | null;
+  createdAt: string;
+}
 
 interface CategorySummaryResponse {
   id: string;
