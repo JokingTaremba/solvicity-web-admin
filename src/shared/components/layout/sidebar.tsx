@@ -1,5 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { LayoutDashboard, FileText, Tag, Users } from "lucide-react";
+import {
+  LayoutDashboard,
+  FileText,
+  Tag,
+  Users,
+  MessageSquare,
+} from "lucide-react";
 
 import {
   Sidebar as SidebarPrimitive,
@@ -17,6 +23,7 @@ import { UserProfileMenu } from "./user-profile-menu";
 const navItems = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
   { to: "/reports", label: "Reports", icon: FileText },
+  { to: "/comments", label: "Comentários", icon: MessageSquare },
   { to: "/categories", label: "Categorias", icon: Tag },
   { to: "/users", label: "Utilizadores", icon: Users },
 ] as const;

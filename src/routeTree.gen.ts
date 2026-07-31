@@ -13,6 +13,7 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthIndexRouteImport } from './routes/_auth/index'
 import { Route as AuthCategoriesIndexRouteImport } from './routes/_auth/categories/index'
+import { Route as AuthCommentsIndexRouteImport } from './routes/_auth/comments/index'
 import { Route as AuthReportsIndexRouteImport } from './routes/_auth/reports/index'
 import { Route as AuthReportsReportIdRouteImport } from './routes/_auth/reports/$reportId'
 import { Route as AuthUsersIndexRouteImport } from './routes/_auth/users/index'
@@ -36,6 +37,11 @@ const AuthCategoriesIndexRoute = AuthCategoriesIndexRouteImport.update({
   path: '/categories/',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthCommentsIndexRoute = AuthCommentsIndexRouteImport.update({
+  id: '/comments/',
+  path: '/comments/',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AuthReportsIndexRoute = AuthReportsIndexRouteImport.update({
   id: '/reports/',
   path: '/reports/',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/reports/$reportId': typeof AuthReportsReportIdRoute
   '/categories/': typeof AuthCategoriesIndexRoute
+  '/comments/': typeof AuthCommentsIndexRoute
   '/reports/': typeof AuthReportsIndexRoute
   '/users/': typeof AuthUsersIndexRoute
 }
@@ -65,6 +72,7 @@ export interface FileRoutesByTo {
   '/': typeof AuthIndexRoute
   '/reports/$reportId': typeof AuthReportsReportIdRoute
   '/categories': typeof AuthCategoriesIndexRoute
+  '/comments': typeof AuthCommentsIndexRoute
   '/reports': typeof AuthReportsIndexRoute
   '/users': typeof AuthUsersIndexRoute
 }
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   '/_auth/': typeof AuthIndexRoute
   '/_auth/reports/$reportId': typeof AuthReportsReportIdRoute
   '/_auth/categories/': typeof AuthCategoriesIndexRoute
+  '/_auth/comments/': typeof AuthCommentsIndexRoute
   '/_auth/reports/': typeof AuthReportsIndexRoute
   '/_auth/users/': typeof AuthUsersIndexRoute
 }
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reports/$reportId'
     | '/categories/'
+    | '/comments/'
     | '/reports/'
     | '/users/'
   fileRoutesByTo: FileRoutesByTo
@@ -93,6 +103,7 @@ export interface FileRouteTypes {
     | '/'
     | '/reports/$reportId'
     | '/categories'
+    | '/comments'
     | '/reports'
     | '/users'
   id:
@@ -102,6 +113,7 @@ export interface FileRouteTypes {
     | '/_auth/'
     | '/_auth/reports/$reportId'
     | '/_auth/categories/'
+    | '/_auth/comments/'
     | '/_auth/reports/'
     | '/_auth/users/'
   fileRoutesById: FileRoutesById
@@ -141,6 +153,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthCategoriesIndexRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/comments/': {
+      id: '/_auth/comments/'
+      path: '/comments'
+      fullPath: '/comments/'
+      preLoaderRoute: typeof AuthCommentsIndexRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/reports/': {
       id: '/_auth/reports/'
       path: '/reports'
@@ -169,6 +188,7 @@ interface AuthRouteChildren {
   AuthIndexRoute: typeof AuthIndexRoute
   AuthReportsReportIdRoute: typeof AuthReportsReportIdRoute
   AuthCategoriesIndexRoute: typeof AuthCategoriesIndexRoute
+  AuthCommentsIndexRoute: typeof AuthCommentsIndexRoute
   AuthReportsIndexRoute: typeof AuthReportsIndexRoute
   AuthUsersIndexRoute: typeof AuthUsersIndexRoute
 }
@@ -177,6 +197,7 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
   AuthReportsReportIdRoute: AuthReportsReportIdRoute,
   AuthCategoriesIndexRoute: AuthCategoriesIndexRoute,
+  AuthCommentsIndexRoute: AuthCommentsIndexRoute,
   AuthReportsIndexRoute: AuthReportsIndexRoute,
   AuthUsersIndexRoute: AuthUsersIndexRoute,
 }
