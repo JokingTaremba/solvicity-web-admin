@@ -1,5 +1,5 @@
 import { useDeleteReport } from "@/features/reports/hooks/use-reports";
-import type { ReportSummaryResponse } from "@/features/reports/types/reports-types";
+import type { ReportStatus } from "@/features/reports/types/reports-types";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -11,10 +11,15 @@ import {
   AlertDialogAction,
 } from "@/shared/components/ui/alert-dialog";
 
+interface ReportDeleteTarget {
+  id: string;
+  title: string;
+  status: ReportStatus;
+}
 interface DeleteReportDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  report: ReportSummaryResponse | null;
+  report: ReportDeleteTarget | null;
 }
 
 export function DeleteReportDialog({

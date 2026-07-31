@@ -4,7 +4,6 @@ import { useChangeReportStatus } from "@/features/reports/hooks/use-reports";
 import {
   REPORT_STATUS_TRANSITIONS,
   type ReportStatus,
-  type ReportSummaryResponse,
 } from "@/features/reports/types/reports-types";
 import { ReportStatusBadge } from "@/features/reports/components/report-status-badge";
 import { Button } from "@/shared/components/ui/button";
@@ -27,10 +26,16 @@ const statusLabels: Record<ReportStatus, string> = {
   REJECTED: "Rejeitado",
 };
 
+interface ReportStatusTarget {
+  id: string;
+  title: string;
+  status: ReportStatus;
+}
+
 interface ChangeStatusDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  report: ReportSummaryResponse | null;
+  report: ReportStatusTarget | null;
 }
 
 export function ChangeStatusDialog({
