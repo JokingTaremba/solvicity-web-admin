@@ -30,7 +30,7 @@ export function MediaGallery({ media }: { media: MediaResponse[] }) {
 
   if (media.length === 0) {
     return (
-      <div className="flex h-72 flex-col items-center justify-center gap-2 text-muted-foreground">
+      <div className="flex h-full flex-col items-center justify-center gap-2 text-muted-foreground">
         <ImageOff className="size-6" />
         <p className="text-sm">Sem imagens.</p>
       </div>
@@ -43,7 +43,7 @@ export function MediaGallery({ media }: { media: MediaResponse[] }) {
   return (
     <>
       <div
-        className={`grid h-72 gap-0.5 overflow-hidden rounded-md ${getGridClass(
+        className={`grid h-full gap-0.5 overflow-hidden rounded-md  ${getGridClass(
           visible.length,
         )}`}
       >

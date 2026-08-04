@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, MapPin, RefreshCw, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  History,
+  Info,
+  MapPin,
+  RefreshCw,
+  Trash2,
+} from "lucide-react";
 
 import { useReport } from "@/features/reports/hooks/use-reports";
 import { ReportStatusBadge } from "@/features/reports/components/report-status-badge";
@@ -93,7 +100,7 @@ export function ReportDetailPage() {
               </p>
 
               <div className="grid grid-cols-1 gap-4 border-t border-border pt-4 sm:grid-cols-2">
-                <div className="flex flex-col gap-2">
+                <div className="flex h-72 flex-col gap-2">
                   <p className="text-sm font-medium text-muted-foreground">
                     Imagens ({report.media.length})
                   </p>
@@ -118,7 +125,10 @@ export function ReportDetailPage() {
         <div className="flex flex-col gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Detalhes</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Info className="size-4" />
+                Detalhes
+              </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-3 text-sm">
               <div className="flex justify-between">
@@ -140,7 +150,7 @@ export function ReportDetailPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <MapPin className="size-4" />
-                Morada
+                Endereço
               </CardTitle>
             </CardHeader>
             <CardContent className="text-sm">
@@ -159,7 +169,10 @@ export function ReportDetailPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Histórico de estado</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <History className="size-4" />
+                Histórico de estado
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <StatusHistoryTimeline history={report.statusHistory} />
