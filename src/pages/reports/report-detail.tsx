@@ -85,7 +85,7 @@ export function ReportDetailPage() {
         <div className="flex flex-col gap-6 lg:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle>Detalhes do report</CardTitle>
+              <CardTitle>Detalhes do reporte</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
               <p className="text-sm leading-relaxed">

@@ -19,7 +19,7 @@ function getInitials(name: string) {
 export function CommentList({ comments }: { comments: CommentResponse[] }) {
   if (comments.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-2 py-8 text-muted-foreground">
+      <div className="flex h-full flex-col items-center justify-center gap-2 text-muted-foreground">
         <MessageSquareOff className="size-8" />
         <p className="text-sm">Ainda sem comentários.</p>
       </div>
