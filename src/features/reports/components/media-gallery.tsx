@@ -40,7 +40,7 @@ export function MediaGallery({ media }: { media: MediaResponse[] }) {
   return (
     <>
       <div
-        className={`grid h-full gap-0.5 overflow-hidden rounded-md ${getGridClass(visible.length)}`}
+        className={`grid h-78 gap-0.5 overflow-hidden rounded-md ${getGridClass(visible.length)}`}
       >
         {visible.map((item, index) => {
           const isLastTile = index === MAX_PREVIEW - 1 && remaining > 0;

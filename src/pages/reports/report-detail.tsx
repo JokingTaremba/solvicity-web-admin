@@ -93,19 +93,19 @@ export function ReportDetailPage() {
               </p>
 
               <div className="grid grid-cols-1 gap-4 border-t border-border pt-4 sm:grid-cols-2">
-                <div className="flex h-56 flex-col gap-2">
+                <div className="flex flex-col gap-2">
                   <p className="text-sm font-medium text-muted-foreground">
                     Imagens ({report.media.length})
                   </p>
-                  <div className="flex-1">
-                    <MediaGallery media={report.media} />
-                  </div>
+
+                  <MediaGallery media={report.media} />
                 </div>
 
-                <div className="flex h-56 flex-col gap-2">
+                <div className="flex h-78 flex-col gap-2">
                   <p className="text-sm font-medium text-muted-foreground">
                     Comentários ({report.comments.length})
                   </p>
+
                   <div className="flex-1 overflow-y-auto pr-1">
                     <CommentList comments={report.comments} />
                   </div>
