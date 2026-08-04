@@ -35,7 +35,7 @@ export function ReportFilters({
         placeholder="Pesquisar por título..."
         value={titleFilter}
         onChange={(e) => onTitleFilterChange(e.target.value)}
-        className="max-w-xs"
+        className="w-64"
       />
       <Select
         value={statusFilter}

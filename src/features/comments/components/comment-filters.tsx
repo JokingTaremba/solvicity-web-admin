@@ -12,10 +12,10 @@ export function CommentFilters({
   return (
     <div className="flex items-center gap-3">
       <Input
-        placeholder="Pesquisar no texto do comentário..."
+        placeholder="Pesquisar pelo comentário..."
         value={textFilter}
         onChange={(e) => onTextFilterChange(e.target.value)}
-        className="max-w-xs"
+        className="w-64"
       />
     </div>
   );

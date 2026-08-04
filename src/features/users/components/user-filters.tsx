@@ -33,7 +33,7 @@ export function UserFilters({
         placeholder="Pesquisar por nome..."
         value={nameFilter}
         onChange={(e) => onNameFilterChange(e.target.value)}
-        className="max-w-xs"
+        className="w-64"
       />
       <Select
         value={roleFilter}
