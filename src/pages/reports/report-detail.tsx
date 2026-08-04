@@ -101,7 +101,7 @@ export function ReportDetailPage() {
                   <MediaGallery media={report.media} />
                 </div>
 
-                <div className="flex h-78 flex-col gap-2">
+                <div className="flex h-72 flex-col gap-2">
                   <p className="text-sm font-medium text-muted-foreground">
                     Comentários ({report.comments.length})
                   </p>
