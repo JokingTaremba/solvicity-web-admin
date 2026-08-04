@@ -85,30 +85,32 @@ export function ReportDetailPage() {
         <div className="flex flex-col gap-6 lg:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle>Descrição</CardTitle>
+              <CardTitle>Detalhes do report</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm">
+            <CardContent className="flex flex-col gap-4">
+              <p className="text-sm leading-relaxed">
                 {report.description || "Sem descrição fornecida."}
               </p>
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Imagens</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <MediaGallery media={report.media} />
-            </CardContent>
-          </Card>
+              <div className="grid grid-cols-1 gap-4 border-t border-border pt-4 sm:grid-cols-2">
+                <div className="flex h-56 flex-col gap-2">
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Imagens ({report.media.length})
+                  </p>
+                  <div className="flex-1">
+                    <MediaGallery media={report.media} />
+                  </div>
+                </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Comentários ({report.comments.length})</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CommentList comments={report.comments} />
+                <div className="flex h-56 flex-col gap-2">
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Comentários ({report.comments.length})
+                  </p>
+                  <div className="flex-1 overflow-y-auto pr-1">
+                    <CommentList comments={report.comments} />
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
