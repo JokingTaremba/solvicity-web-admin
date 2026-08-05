@@ -7,8 +7,13 @@ export interface UserResponse {
   phone: string | null;
   role: UserRole;
   avatarUrl: string | null;
+  isActive: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface ChangeUserRoleRequest {
+  role: UserRole;
 }
 
 export interface UserFilterParams {
