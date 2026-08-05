@@ -5,6 +5,7 @@ import {
   AvatarImage,
   AvatarFallback,
 } from "@/shared/components/ui/avatar";
+import { Badge } from "@/shared/components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -56,6 +57,12 @@ export function UserDetailDialog({
         </div>
 
         <div className="flex flex-col gap-3 text-sm">
+          <div className="flex justify-between border-b border-border pb-2">
+            <span className="text-muted-foreground">Estado</span>
+            <Badge variant={user.isActive ? "success" : "muted"}>
+              {user.isActive ? "Activo" : "Inactivo"}
+            </Badge>
+          </div>
           <div className="flex justify-between border-b border-border pb-2">
             <span className="text-muted-foreground">Email</span>
             <span>{user.email}</span>

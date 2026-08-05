@@ -5,15 +5,21 @@ import { useUsers } from "@/features/users/hooks/use-users";
 import { UserFilters } from "@/features/users/components/user-filters";
 import { getUserColumns } from "@/features/users/components/user-columns";
 import { UserDetailDialog } from "@/features/users/components/user-detail-dialog";
+import { ChangeRoleDialog } from "@/features/users/components/change-role-dialog";
+import { ToggleActiveDialog } from "@/features/users/components/toggle-active-dialog";
+import { DeleteUserDialog } from "@/features/users/components/delete-user-dialog";
 import type {
   UserResponse,
   UserRole,
 } from "@/features/users/types/users-types";
+import { useAuthStore } from "@/shared/stores/auth-store";
 import { DataTable } from "@/shared/components/data-table/data-table";
 import { DataTablePagination } from "@/shared/components/data-table/data-table-pagination";
 import { ListPageShell } from "@/shared/components/layout/list-page-shell";
 
 export function UsersPage() {
+  const currentUser = useAuthStore((s) => s.user);
+
   const [nameFilter, setNameFilter] = useState("");
   const [roleFilter, setRoleFilter] = useState<UserRole | "ALL">("ALL");
   const [page, setPage] = useState(0);
@@ -22,6 +28,9 @@ export function UsersPage() {
   ]);
 
   const [detailOpen, setDetailOpen] = useState(false);
+  const [roleDialogOpen, setRoleDialogOpen] = useState(false);
+  const [toggleActiveOpen, setToggleActiveOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserResponse | null>(null);
 
   const activeSort = sorting[0];
@@ -37,7 +46,24 @@ export function UsersPage() {
     sortDirection: activeSort?.desc ? "DESC" : "ASC",
   });
 
-  const columns = getUserColumns();
+  const columns = currentUser
+    ? getUserColumns({
+        currentUserId: currentUser.id,
+        currentUserRole: currentUser.role,
+        onChangeRole: (user) => {
+          setSelectedUser(user);
+          setRoleDialogOpen(true);
+        },
+        onToggleActive: (user) => {
+          setSelectedUser(user);
+          setToggleActiveOpen(true);
+        },
+        onDelete: (user) => {
+          setSelectedUser(user);
+          setDeleteOpen(true);
+        },
+      })
+    : [];
 
   return (
     <>
@@ -101,6 +127,21 @@ export function UsersPage() {
       <UserDetailDialog
         open={detailOpen}
         onOpenChange={setDetailOpen}
+        user={selectedUser}
+      />
+      <ChangeRoleDialog
+        open={roleDialogOpen}
+        onOpenChange={setRoleDialogOpen}
+        user={selectedUser}
+      />
+      <ToggleActiveDialog
+        open={toggleActiveOpen}
+        onOpenChange={setToggleActiveOpen}
+        user={selectedUser}
+      />
+      <DeleteUserDialog
+        open={deleteOpen}
+        onOpenChange={setDeleteOpen}
         user={selectedUser}
       />
     </>

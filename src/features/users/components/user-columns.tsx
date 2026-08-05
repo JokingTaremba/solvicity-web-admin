@@ -71,25 +71,6 @@ export function getUserColumns({
       ),
     },
     {
-      accessorKey: "email",
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Email" />
-      ),
-      cell: ({ row }) => row.original.email,
-    },
-    {
-      id: "phone",
-      header: "Telefone",
-      cell: ({ row }) => row.original.phone ?? "—",
-    },
-    {
-      accessorKey: "role",
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Role" />
-      ),
-      cell: ({ row }) => <UserRoleBadge role={row.original.role} />,
-    },
-    {
       accessorKey: "isActive",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Estado" />
@@ -99,6 +80,25 @@ export function getUserColumns({
           {row.original.isActive ? "Activo" : "Inactivo"}
         </Badge>
       ),
+    },
+    {
+      accessorKey: "email",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Email" />
+      ),
+      cell: ({ row }) => row.original.email,
+    },
+    {
+      accessorKey: "role",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Role" />
+      ),
+      cell: ({ row }) => <UserRoleBadge role={row.original.role} />,
+    },
+    {
+      id: "phone",
+      header: "Telefone",
+      cell: ({ row }) => row.original.phone ?? "—",
     },
     {
       accessorKey: "createdAt",
@@ -115,7 +115,7 @@ export function getUserColumns({
       id: "actions",
       header: () => (
         <div className="flex justify-center">
-          <SquareMousePointer className="size-4 text-muted-foreground" />
+          <SquareMousePointer className="size-4" />
         </div>
       ),
       cell: ({ row }) => {
