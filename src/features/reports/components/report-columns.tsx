@@ -55,9 +55,13 @@ export function getReportColumns({
       cell: ({ row }) => <ReportStatusBadge status={row.original.status} />,
     },
     {
-      id: "city",
-      header: "Cidade",
-      cell: ({ row }) => row.original.city ?? "—",
+      id: "address",
+      header: "Endereço",
+      cell: ({ row }) => {
+        const { street, city } = row.original;
+
+        return [street, city].filter(Boolean).join(", ") || "—";
+      },
     },
     {
       id: "user",

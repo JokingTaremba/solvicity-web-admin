@@ -67,6 +67,7 @@ export interface ReportSummaryResponse {
   status: ReportStatus;
   latitude: number | null;
   longitude: number | null;
+  street: string | null;
   city: string | null;
   createdAt: string;
 }
