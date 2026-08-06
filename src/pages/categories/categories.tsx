@@ -12,6 +12,10 @@ import { DataTable } from "@/shared/components/data-table/data-table";
 import { DataTablePagination } from "@/shared/components/data-table/data-table-pagination";
 import { ListPageShell } from "@/shared/components/layout/list-page-shell";
 import { Button } from "@/shared/components/ui/button";
+import { ExportMenu } from "@/shared/components/data-table/export-menu";
+import { categoryExportColumns } from "@/features/categories/utils/category-export";
+import { fetchCategories } from "@/features/categories/api/categories-api";
+import { fetchAllPages } from "@/shared/utils/export/fetch-all-pages";
 
 export function CategoriesPage() {
   const [nameFilter, setNameFilter] = useState("");
@@ -71,10 +75,24 @@ export function CategoriesPage() {
                   : "A carregar..."}
               </p>
             </div>
-            <Button onClick={openCreateDialog}>
-              <Plus />
-              Nova categoria
-            </Button>
+            <div className="flex gap-2">
+              <ExportMenu
+                columns={categoryExportColumns}
+                filenameBase="categorias"
+                title="Categorias"
+                fetchAll={() =>
+                  fetchAllPages(fetchCategories, {
+                    name: nameFilter || undefined,
+                    sortBy: "name",
+                    sortDirection: "ASC",
+                  })
+                }
+              />
+              <Button onClick={openCreateDialog}>
+                <Plus />
+                Nova categoria
+              </Button>
+            </div>
           </div>
         }
         filters={
