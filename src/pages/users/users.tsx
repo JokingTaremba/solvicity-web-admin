@@ -16,6 +16,10 @@ import { useAuthStore } from "@/shared/stores/auth-store";
 import { DataTable } from "@/shared/components/data-table/data-table";
 import { DataTablePagination } from "@/shared/components/data-table/data-table-pagination";
 import { ListPageShell } from "@/shared/components/layout/list-page-shell";
+import { ExportMenu } from "@/shared/components/data-table/export-menu";
+import { userExportColumns } from "@/features/users/utils/user-export";
+import { fetchAllPages } from "@/shared/utils/export/fetch-all-pages";
+import { fetchUsers } from "@/features/users/api/users-api";
 
 export function UsersPage() {
   const currentUser = useAuthStore((s) => s.user);
@@ -69,13 +73,28 @@ export function UsersPage() {
     <>
       <ListPageShell
         header={
-          <div>
-            <h1 className="text-2xl font-semibold">Utilizadores</h1>
-            <p className="text-muted-foreground">
-              {data
-                ? `${data.totalElements} ${data.totalElements === 1 ? "utilizador" : "utilizadores"}`
-                : "A carregar..."}
-            </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold">Utilizadores</h1>
+              <p className="text-muted-foreground">
+                {data
+                  ? `${data.totalElements} ${data.totalElements === 1 ? "utilizador" : "utilizadores"}`
+                  : "A carregar..."}
+              </p>
+            </div>
+            <ExportMenu
+              columns={userExportColumns}
+              filenameBase="utilizadores"
+              title="Utilizadores"
+              fetchAll={() =>
+                fetchAllPages(fetchUsers, {
+                  name: nameFilter || undefined,
+                  role: roleFilter === "ALL" ? undefined : roleFilter,
+                  sortBy: "createdAt",
+                  sortDirection: "DESC",
+                })
+              }
+            />
           </div>
         }
         filters={

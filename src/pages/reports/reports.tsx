@@ -15,6 +15,10 @@ import { DataTable } from "@/shared/components/data-table/data-table";
 import { DataTablePagination } from "@/shared/components/data-table/data-table-pagination";
 import { ListPageShell } from "@/shared/components/layout/list-page-shell";
 import { useNavigate } from "@tanstack/react-router";
+import { ExportMenu } from "@/shared/components/data-table/export-menu";
+import { reportExportColumns } from "@/features/reports/utils/report-export";
+import { fetchAllPages } from "@/shared/utils/export/fetch-all-pages";
+import { fetchReports } from "@/features/reports/api/reports-api";
 
 export function ReportsPage() {
   const [titleFilter, setTitleFilter] = useState("");
@@ -70,13 +74,28 @@ export function ReportsPage() {
     <>
       <ListPageShell
         header={
-          <div>
-            <h1 className="text-2xl font-semibold">Reports</h1>
-            <p className="text-muted-foreground">
-              {data
-                ? `${data.totalElements} ${data.totalElements === 1 ? "report" : "reports"}`
-                : "A carregar..."}
-            </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold">Reports</h1>
+              <p className="text-muted-foreground">
+                {data
+                  ? `${data.totalElements} ${data.totalElements === 1 ? "report" : "reports"}`
+                  : "A carregar..."}
+              </p>
+            </div>
+            <ExportMenu
+              columns={reportExportColumns}
+              filenameBase="reports"
+              title="Reports"
+              fetchAll={() =>
+                fetchAllPages(fetchReports, {
+                  title: titleFilter || undefined,
+                  status: statusFilter === "ALL" ? undefined : statusFilter,
+                  sortBy: "createdAt",
+                  sortDirection: "DESC",
+                })
+              }
+            />
           </div>
         }
         filters={

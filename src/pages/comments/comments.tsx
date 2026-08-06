@@ -11,6 +11,10 @@ import type { CommentResponse } from "@/features/comments/types/comments-types";
 import { DataTable } from "@/shared/components/data-table/data-table";
 import { DataTablePagination } from "@/shared/components/data-table/data-table-pagination";
 import { ListPageShell } from "@/shared/components/layout/list-page-shell";
+import { ExportMenu } from "@/shared/components/data-table/export-menu";
+import { commentExportColumns } from "@/features/comments/utils/comment-export";
+import { fetchAllPages } from "@/shared/utils/export/fetch-all-pages";
+import { fetchComments } from "@/features/comments/api/comments-api";
 
 export function CommentsPage() {
   const navigate = useNavigate();
@@ -57,13 +61,27 @@ export function CommentsPage() {
     <>
       <ListPageShell
         header={
-          <div>
-            <h1 className="text-2xl font-semibold">Comentários</h1>
-            <p className="text-muted-foreground">
-              {data
-                ? `${data.totalElements} ${data.totalElements === 1 ? "comentário" : "comentários"}`
-                : "A carregar..."}
-            </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold">Comentários</h1>
+              <p className="text-muted-foreground">
+                {data
+                  ? `${data.totalElements} ${data.totalElements === 1 ? "comentário" : "comentários"}`
+                  : "A carregar..."}
+              </p>
+            </div>
+            <ExportMenu
+              columns={commentExportColumns}
+              filenameBase="comentarios"
+              title="Comentários"
+              fetchAll={() =>
+                fetchAllPages(fetchComments, {
+                  text: textFilter || undefined,
+                  sortBy: "createdAt",
+                  sortDirection: "DESC",
+                })
+              }
+            />
           </div>
         }
         filters={
