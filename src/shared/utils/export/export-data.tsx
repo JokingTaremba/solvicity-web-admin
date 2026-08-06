@@ -54,7 +54,6 @@ export function exportToExcel<T>(
   XLSX.writeFile(workbook, `${filename}.xlsx`);
 }
 
-// Agora assíncrono — pdf().toBlob() do @react-pdf/renderer devolve uma Promise
 export async function exportToPdf<T>(
   data: T[],
   columns: ExportColumn<T>[],

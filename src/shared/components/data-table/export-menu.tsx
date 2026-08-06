@@ -43,7 +43,7 @@ export function ExportMenu<T>({
       const filename = `${filenameBase}-${new Date().toISOString().slice(0, 10)}`;
       if (format === "csv") exportToCsv(data, columns, filename);
       if (format === "excel") exportToExcel(data, columns, filename);
-      if (format === "pdf") exportToPdf(data, columns, filename, title);
+      if (format === "pdf") await exportToPdf(data, columns, filename, title);
     } catch {
       toast.error("Não foi possível exportar os dados.");
     } finally {
