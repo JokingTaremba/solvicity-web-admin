@@ -1,7 +1,8 @@
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+import { pdf } from "@react-pdf/renderer";
+
+import { PdfTableDocument } from "@/shared/utils/export/pdf-table-document";
 
 export interface ExportColumn<T> {
   header: string;
@@ -18,8 +19,13 @@ function toRecords<T>(data: T[], columns: ExportColumn<T>[]) {
   });
 }
 
-function downloadBlob(content: BlobPart, filename: string, mimeType: string) {
-  const blob = new Blob([content], { type: mimeType });
+function download(
+  content: Blob | BlobPart,
+  filename: string,
+  mimeType?: string,
+) {
+  const blob =
+    content instanceof Blob ? content : new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
@@ -34,7 +40,7 @@ export function exportToCsv<T>(
   filename: string,
 ) {
   const csv = Papa.unparse(toRecords(data, columns));
-  downloadBlob(csv, `${filename}.csv`, "text/csv;charset=utf-8;");
+  download(csv, `${filename}.csv`, "text/csv;charset=utf-8;");
 }
 
 export function exportToExcel<T>(
@@ -48,26 +54,15 @@ export function exportToExcel<T>(
   XLSX.writeFile(workbook, `${filename}.xlsx`);
 }
 
-export function exportToPdf<T>(
+// Agora assíncrono — pdf().toBlob() do @react-pdf/renderer devolve uma Promise
+export async function exportToPdf<T>(
   data: T[],
   columns: ExportColumn<T>[],
   filename: string,
   title?: string,
 ) {
-  const doc = new jsPDF();
-
-  if (title) {
-    doc.setFontSize(14);
-    doc.text(title, 14, 15);
-  }
-
-  autoTable(doc, {
-    startY: title ? 22 : 14,
-    head: [columns.map((c) => c.header)],
-    body: data.map((row) => columns.map((c) => String(c.accessor(row)))),
-    styles: { fontSize: 8, cellPadding: 3 },
-    headStyles: { fillColor: [37, 99, 235] },
-  });
-
-  doc.save(`${filename}.pdf`);
+  const blob = await pdf(
+    <PdfTableDocument columns={columns} data={data} title={title} />,
+  ).toBlob();
+  download(blob, `${filename}.pdf`);
 }
